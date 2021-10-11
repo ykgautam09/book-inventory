@@ -14,3 +14,5 @@
 <li>insert credentials in .env file
 <li>run server by node app.js
 </ol>
+
+##### Note deployment environment on heroku is down due to mysql buildpack
