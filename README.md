@@ -14,3 +14,5 @@
 <li>insert credentials in .env file
 <li>run server by node app.js
 </ol>
+
+#### branch heroku is ready to deploy on heroku platform
