@@ -1,0 +1,51 @@
+<%- include('_header.ejs') %>
+<table class="table">
+    <thead>
+    <tr>
+        <th>User ID</th>
+        <th>User Name</th>
+        <th>Email</th>
+        <th>User Total Order</th>
+        <th>Created At</th>
+        <th>Last Login</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <!-- table data from database -->
+    <% for (let i = 0;i < userData.length;i++){ %>
+        <tr>
+            <td>
+                <%- userData[i].user_id %>
+            </td>
+            <td>
+                <%- userData[i].user_name %>
+            </td>
+            <td>
+                <%- userData[i].user_email %>
+            </td>
+            <td>
+                <%- userData[i].total_orders %>
+            </td>
+            <td>
+                <%- userData[i].created_at %>
+            </td>
+            <td>
+                <%- userData[i].last_login %>
+            </td>
+        </tr>
+    <% } %>
+    </tbody>
+    <tfoot>
+    <tr>
+        <th>User ID</th>
+        <th>User Name</th>
+        <th>Email</th>
+        <th>User Total Order</th>
+        <th>Created At</th>
+        <th>Last Login</th>
+    </tr>
+    </tfoot>
+</table>
+
+<%- include('_footer.ejs') %>

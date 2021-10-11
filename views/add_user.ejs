@@ -1,0 +1,89 @@
+<%- include('_header.ejs') %>
+<style>
+    body {
+        background: url('https://static-communitytable.parade.com/wp-content/uploads/2014/03/rethink-target-heart-rate-number-ftr.jpg') fixed;
+        background-size: cover;
+    }
+
+    *[role="form"] {
+        max-width: 530px;
+        padding: 15px;
+        margin: 0 auto;
+        border-radius: 0.3em;
+        background-color: #f2f2f2;
+    }
+
+    *[role="form"] h2 {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 40px;
+        font-weight: 600;
+        color: #000000;
+        margin-top: 5%;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+    }
+</style>
+
+<div class="container">
+    <form class="form-horizontal" action="/insert" method="POST" role="form" enctype="multipart/form-data">
+        <h2>Register New User</h2>
+        <div class="form-group">
+            <label for="name" class="col-sm-3 control-label">Name*</label>
+            <div class="col-sm-9">
+                <input type="text" id="name" placeholder="Name" name="name" class="form-control" autofocus
+                       required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="username" class="col-sm-3 control-label">Username</label>
+            <div class="col-sm-9">
+                <input type="text" id="username" placeholder="Username" name="username" class="form-control"
+                       required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email" class="col-sm-3 control-label">Email* </label>
+            <div class="col-sm-9">
+                <input type="email" id="email" placeholder="Email" class="form-control" name="email" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="col-sm-3 control-label">Password*</label>
+            <div class="col-sm-9">
+                <input type="password" name="password" id="password" placeholder="Password" class="form-control"
+                       required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="image" class="col-sm-3 control-label">Image</label>
+            <div class="col-sm-9">
+                <input type="file" name="image" id="image" placeholder="Image" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-9 col-sm-offset-3">
+                <span class="help-block">*Required fields</span>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Register</button>
+    </form> <!-- /form -->
+</div> <!-- ./container -->
+
+<script>
+    $(function () {
+        $.validator.setDefaults({
+            highlight: function (element) {
+                $(element)
+                    .closest('.form-group')
+                    .addClass('has-error')
+            },
+            unhighlight: function (element) {
+                $(element)
+                    .closest('.form-group')
+                    .removeClass('has-error')
+            }
+        });
+    })
+</script>
+<%- include('_footer.ejs') %>
