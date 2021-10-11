@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 
 // retrieve all users data
 router.get('/all-user', async (req, res) => {
-    const [userData, _metadata] = await db.connection.query('SELECT user_id,user_name,user_email,total_orders,created_at,last_logged_in FROM `book_inventory`;',)
+    const [userData, _metadata] = await db.connection.query('SELECT user_id,user_name,user_email,total_orders,created_at,last_logged_in FROM `customer_detail`;',)
         .catch(err => {
             console.log(err)
             return res.send('Something gone wrong!')
@@ -24,7 +24,7 @@ router.get('/all-user', async (req, res) => {
 router.get('/details/:user_id', async (req, res) => {
     let userId = req.params.user_id;
     console.log(userId);
-    const [result, _metadata] = await db.connection.query('SELECT user_id,user_name,user_email,total_orders,created_at,last_logged_in FROM `book_inventory` WHERE user_id=?;', {replacements: [userId]})
+    const [result, _metadata] = await db.connection.query('SELECT user_id,user_name,user_email,total_orders,created_at,last_logged_in FROM `customer_detail` WHERE user_id=?;', {replacements: [userId]})
         .catch(err => {
             console.log(err)
             return res.send('Something gone wrong!')
@@ -55,7 +55,7 @@ router.post('/update', upload.single('image'), async (req, res) => {
     // creation and verification should been handled from a dedicated route 
     verifyToken(createToken(jwtPayload))  // dummy procedure and have no affect on procedure
 
-    const [dbData, metadata] = await db.connection.query('SELECT user_email,user_password FROM `book_inventory`WHERE user_email=? AND user_password=?', {replacements: [userData.user_email, userData.user_password]})
+    const [dbData, metadata] = await db.connection.query('SELECT user_email,user_password FROM `customer_detail`WHERE user_email=? AND user_password=?', {replacements: [userData.user_email, userData.user_password]})
         .catch(err => {
             console.log(err)
             return res.send('Something gone wrong!')
@@ -70,7 +70,7 @@ router.post('/update', upload.single('image'), async (req, res) => {
     }
     delete userData['user_password']
     delete userData['user_email']
-   await db.native.promise().query('UPDATE `book_inventory` SET ? WHERE user_email=?', [userData, jwtPayload.user_email])
+   await db.native.promise().query('UPDATE `customer_detail` SET ? WHERE user_email=?', [userData, jwtPayload.user_email])
         .catch(err => {
             console.log(err)
             return res.send('Something gone wrong!')
@@ -104,7 +104,7 @@ router.post('/insert', upload.single('image'), async (req, res) => {
     // creation and verification should been handled from a dedicated route 
     verifyToken(createToken(jwtPayload))  // dummy procedure and have no affect on procedure
 
-    const [result, _metadata] = await db.native.promise().query('INSERT INTO `book_inventory` SET ?', userData)
+    const [result, _metadata] = await db.native.promise().query('INSERT INTO `customer_detail` SET ?', userData)
         .catch(err => {
             console.log(err)
             return res.send('Something gone wrong!')
@@ -117,7 +117,7 @@ router.post('/insert', upload.single('image'), async (req, res) => {
 // delete user data of provided user ID
 router.post('/delete/:user_id', async (req, res) => {
     let userId = req.params.user_id;
-    const [result, _metadata] = await db.connection.query('DELETE  FROM `book_inventory` WHERE user_id=?', {replacements: [userId]})
+    const [result, _metadata] = await db.connection.query('DELETE  FROM `customer_detail` WHERE user_id=?', {replacements: [userId]})
         .catch(err => {
             console.log(err)
             return res.send('Something gone wrong!')
@@ -130,7 +130,7 @@ router.post('/delete/:user_id', async (req, res) => {
 // send user image of provided user ID
 router.get('/image/:user_id', async (req, res) => {
     let userId = req.params.user_id;
-    const [result, _metadata] = await db.connection.query('SELECT `user_image` FROM `book_inventory` WHERE user_id=?', {replacements: [userId]})
+    const [result, _metadata] = await db.connection.query('SELECT `user_image` FROM `customer_detail` WHERE user_id=?', {replacements: [userId]})
         .catch(err => {
             console.log(err)
             return res.send('Something gone wrong!')

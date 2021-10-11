@@ -1,7 +1,7 @@
 USE `local`;  -- database name
 
-DROP TABLE IF EXISTS `book_inventory`;  -- drop previous existing table
-CREATE TABLE IF NOT EXISTS `book_inventory`
+DROP TABLE IF EXISTS `customer_detail`;  -- drop previous existing table
+CREATE TABLE IF NOT EXISTS `customer_detail`
 (
     `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
     `user_id` VARCHAR(100) NOT NULL,
